@@ -1,0 +1,16 @@
+{
+  "name": "desktoporganiser",
+  "productName": "Desktop Organiser",
+  "version": "1.0.0",
+  "description": "An app used to organise all other apps and link shortcuts for easier access",
+  "license": "ISC",
+  "author": "Arsh Gupta",
+  "type": "commonjs",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^43.4.1"
+  }
+}
