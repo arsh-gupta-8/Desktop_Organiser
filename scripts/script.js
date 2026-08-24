@@ -12,7 +12,10 @@ appCards.forEach(card => {
   card.addEventListener('click', function() {
     const targetUrl = this.id; 
     
-    window.indexBridge.openWebsite();
+    if (targetUrl !== "AddShortcut"){
+      window.indexBridge.openWebsite(targetUrl);
+    }
+
   });
 });
 

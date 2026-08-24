@@ -101,20 +101,29 @@ body{
   rotate: 180deg;
 }
 
+main{
+  display: flex;
+}
+
 .app-container{
+  height: 20vh;
   margin: 10px;
-  padding: 15px 10px;
+  padding: 15px 20px;
   outline: 3px solid var(--line-colour);
   width: 10rem;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   gap: 10px;
   border-radius: .5rem;
 }
 
 .app-container img{
-  width: 100%;
+  width: auto;
+  height: 100%;
+  max-height: 50%;
+  object-fit: contain;
   border-radius: .5rem;
 }
 
@@ -124,3 +133,4 @@ body{
   outline-color: var(--accent-colour);
   transform: translateY(-2px);
 }
+

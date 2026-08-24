@@ -38,6 +38,6 @@ app.on('window-all-closed', () => {
   }
 })  
 
-ipcMain.handle("openWebsite", () => {
-  shell.openExternal("https://youtube.com")
+ipcMain.handle("openWebsite", (event, targetUrl) => {
+  shell.openExternal(targetUrl)
 })
