@@ -34,6 +34,16 @@ body{
   padding: 5px 1em;
   background-color: var(--base-colour);
   border-right: 1px solid var(--line-colour);
+  position: sticky;
+  top: 0;
+  transition: 300ms ease-in-out;
+  overflow: hidden;
+  text-wrap: nowrap;
+}
+
+#sidebar.close{
+  padding: 5px;
+  width: 60px;
 }
 
 #sidebar ul{
@@ -42,10 +52,53 @@ body{
 
 #sidebar ul li:first-child{
   display: flex;
-  justify-content: center;
-  margin: 15px 0;
+  justify-content: flex-end;
+  margin: 15px 5px;
   font-weight: 600;
-  font-size: 1.2rem;
+  font-size: 1rem;
+}
+
+#sidebar ul li.active a{
+  color: var(--accent-colour);
+  svg{
+    fill: var(--accent-colour);
+  }
+}
+
+#sidebar a, #sidebar .logo{
+  border-radius: .5em;
+  padding: .85em;
+  text-decoration: none;
+  color: var(--text-colour);
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
+#sidebar svg{
+  flex-shrink: 0;
+  fill: var(--text-colour);
+}
+
+#toggle-button{
+  margin-left: auto;
+  padding: .5em;
+  border: none;
+  border-radius: .5em;
+  background: none;
+  cursor: pointer;
+
+  svg{
+    transition: rotate 150ms ease;
+  }
+}
+
+#toggle-button:hover{
+  background-color: var(--hover-colour);
+}
+
+.rotate svg:last-child{
+  rotate: 180deg;
 }
 
 .app-container{
