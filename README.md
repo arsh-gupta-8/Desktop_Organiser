@@ -16,9 +16,8 @@ A highly optimised application used to create collections of apps and websites f
 
 ## Prerequisites
 - **Node.js**: `v18.0.0` or higher (Recommended: LTS version)
-- **npm** (comes with Node) or **Yarn** / **pnpm**
+- **npm** (comes with Node)
 - **Git** (to clone the repository)
-- *Optional:* **Native Build Tools** (Only include this if your project uses native C/C++ modules like `sqlite3` or `keytar`)
 
 ## Installation and setup
 ```bash

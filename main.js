@@ -1,5 +1,6 @@
 const path = require('path');
 const { app, BrowserWindow, shell, ipcMain } = require('electron')
+const fs = require('fs/promises');
 
 const isDev = process.env.NODE_ENV !== 'production';
 const isMac = process.platform === 'darwin';
@@ -41,3 +42,14 @@ app.on('window-all-closed', () => {
 ipcMain.handle("openWebsite", (event, targetUrl) => {
   shell.openExternal(targetUrl)
 })
+
+ipcMain.handle('getShortcuts', async () => {
+  try {
+    const filePath = path.join(__dirname, 'shortcuts.json');
+    const rawData = await fs.readFile(filePath, 'utf-8');
+    return JSON.parse(rawData);
+  } catch (error) {
+    console.error('Failed to read JSON file:', error);
+    return null;
+  }
+});
