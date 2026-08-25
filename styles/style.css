@@ -106,31 +106,43 @@ main{
 }
 
 .app-container{
-  height: 20vh;
+  height: 10rem;
   margin: 10px;
-  padding: 15px 20px;
+  padding: 0 1rem;
   outline: 3px solid var(--line-colour);
-  width: 10rem;
+  width: 8rem;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  gap: 10px;
+  justify-content: flex-start;
+  gap: 20px;
   border-radius: .5rem;
+  overflow: hidden;
+  transition: width 0.4s ease-in-out;
 }
 
-.app-container img{
-  width: auto;
-  height: 100%;
-  max-height: 50%;
-  object-fit: contain;
-  border-radius: .5rem;
+.app-display{
+  width: 8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.app-display img{
+  width: 5rem;
+  height: auto;
+}
+
+.app-information{
+  width: 8rem;
+  flex-shrink: 0;
 }
 
 .app-container:hover {
   cursor: pointer;
   background-color: var(--hover-colour);
   outline-color: var(--accent-colour);
-  transform: translateY(-2px);
+  width: 16rem;
 }
 
