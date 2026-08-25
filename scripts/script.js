@@ -9,7 +9,7 @@ function toggleSidebar(){
 
 
 function addOnClickFunction() {
-  const appCards = document.querySelectorAll('.app-container');
+  const appCards = document.querySelectorAll('.shortcut');
 
   appCards.forEach(card => {
     card.addEventListener('click', function() {
@@ -32,18 +32,18 @@ async function loadShortcuts() {
   if (shortcuts) {
     shortcuts.forEach(shortcut => {
       
-      const main = document.getElementById('all-apps');
+      const main = document.getElementById('all-shortcuts');
       const shortcutCard = document.createElement('div');
 
-      shortcutCard.className = 'app-container';
+      shortcutCard.className = 'container shortcut';
       shortcutCard.id = shortcut.domain;
 
       shortcutCard.innerHTML = `
-        <div class="app-display">
+        <div class="shortcut-display">
           <img src="https://www.google.com/s2/favicons?domain=${shortcut.domain}&sz=128" alt="${shortcut.name}">
           <h3>${shortcut.name}</h3>
         </div>
-        <div class="app-information">
+        <div class="shortcut-information">
           <p>${shortcut.description}</p>
         </div>
       `;
@@ -57,5 +57,5 @@ async function loadShortcuts() {
   }
 }
 
-loadShortcuts();
-addOnClickFunction();
+loadShortcuts().then(addOnClickFunction);
+

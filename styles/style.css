@@ -105,7 +105,7 @@ main{
   display: flex;
 }
 
-.app-container{
+.container{
   height: 10rem;
   margin: 10px;
   padding: 0 1rem;
@@ -120,7 +120,17 @@ main{
   transition: width 0.4s ease-in-out;
 }
 
-.app-display{
+.container:hover {
+  cursor: pointer;
+  background-color: var(--hover-colour);
+  outline-color: var(--accent-colour);
+}
+
+.shortcut:hover{
+  width: 16rem;
+}
+
+.shortcut-display{
   width: 8rem;
   display: flex;
   flex-direction: column;
@@ -129,20 +139,14 @@ main{
   flex-shrink: 0;
 }
 
-.app-display img{
+.shortcut-display img{
   width: 5rem;
   height: auto;
 }
 
-.app-information{
+.shortcut-information{
   width: 8rem;
   flex-shrink: 0;
 }
 
-.app-container:hover {
-  cursor: pointer;
-  background-color: var(--hover-colour);
-  outline-color: var(--accent-colour);
-  width: 16rem;
-}
 

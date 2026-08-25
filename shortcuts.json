@@ -1,4 +1,4 @@
 [
   {"name": "YouTube", "domain": "https://youtube.com", "type": "website", "description": "Watch some videos here"},
-  {"name": "Google", "domain": "google.com", "type": "website", "description": "Search something"}
+  {"name": "Google", "domain": "https://google.com", "type": "website", "description": "Search something"}
 ]
