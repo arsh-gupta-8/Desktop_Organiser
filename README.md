@@ -4,11 +4,13 @@
 A highly optimised application used to create collections of apps and websites frequently used allowing the user to access them efficiently
 
 ## Current state of project
-<img width="977" height="443" alt="image" src="https://github.com/user-attachments/assets/3c36915e-2346-40d8-821d-5440e06d655a" />
+<img width="50%" height="443" alt="image" src="https://github.com/user-attachments/assets/3c36915e-2346-40d8-821d-5440e06d655a" />
+<img width="70%" height="674" alt="image" src="https://github.com/user-attachments/assets/ebf56a71-d21e-4491-9d0c-474a6793e202" />
 
 ## Current Features
 - Access google and youtube
 - Toggle sidebar
+- Add new shortcuts
 
 ## Language and Framework
 - electronjs - used for creating app window and managing external processes
