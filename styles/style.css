@@ -150,22 +150,26 @@ main{
 }
 
 .modal-container{
-  background-color: var(--base-colour);
+  background-color: color-mix(in srgb, var(--base-colour) 40%, transparent);
   position: fixed;
   top: 0;
   left: 0;
-  height: 100vh;
-  width: 100vh;
+  height: 100%;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .modal{
+  background-color: var(--base-colour);
+  padding: 1.5rem;
   width: 20rem;
   display: flex;
   flex-direction: column;
   gap: 20px;
+  border: 5px solid var(--line-colour);
+  border-radius: 1rem;
 }
 
 .modal-content form{
@@ -186,9 +190,31 @@ main{
   font-size: 1rem;
   color: var(--text-colour);
   border-radius: .5rem;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: 0.2s ease, box-shadow 0.2s ease;
 }
 
 .input-container input:focus{
-  outline: 2px solid #5e63ff;
+  outline: 2px solid var(--accent-colour);
+}
+
+.submit-container{
+  margin-top: 20px;
+  width: 20rem;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.submit-container input{
+  width: 40%;
+  color: var(--text-colour);
+  background-color: var(--accent-colour);
+  font-weight: 800;
+  border: none;
+  transition: 0.2s ease, box-shadow 0.2s ease;
+  border-radius: .5rem;
+}
+
+.submit-container :hover{
+  background-color: var(--hover-colour);
 }
