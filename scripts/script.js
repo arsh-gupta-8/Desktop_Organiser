@@ -26,13 +26,13 @@ function addOnClickFunction() {
 
 async function loadShortcuts() {
   
+  const addShortcut = document.getElementById('AddShortcut')
   const shortcuts = await window.indexBridge.getShortcuts();
-  console.log(shortcuts);
+  const main = document.getElementById('all-shortcuts');
 
   if (shortcuts) {
     shortcuts.forEach(shortcut => {
-      
-      const main = document.getElementById('all-shortcuts');
+
       const shortcutCard = document.createElement('div');
 
       shortcutCard.className = 'container shortcut';
@@ -48,7 +48,7 @@ async function loadShortcuts() {
         </div>
       `;
 
-      main.appendChild(shortcutCard);
+      main.insertBefore(shortcutCard, addShortcut);
 
     });
   } else {
