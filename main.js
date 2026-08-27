@@ -40,7 +40,8 @@ app.on('window-all-closed', () => {
 })  
 
 ipcMain.handle("openWebsite", (event, targetUrl) => {
-  shell.openExternal(targetUrl)
+  console.log("Opening domain.. ", targetUrl)
+  shell.openExternal(targetUrl);
 })
 
 ipcMain.handle('getShortcuts', async () => {
@@ -53,3 +54,20 @@ ipcMain.handle('getShortcuts', async () => {
     return null;
   }
 });
+
+ipcMain.handle("createShortcut", async (event, shortcutInfo) => {
+  try {
+    const filePath = path.join(__dirname, 'shortcuts.json');
+    const data = await fs.readFile(filePath, 'utf-8');
+    
+    shortcutsList = JSON.parse(data);
+    shortcutsList.push(shortcutInfo);
+    updatedList = JSON.stringify(shortcutsList);
+    
+    await fs.writeFile(filePath, updatedList, 'utf-8');
+    console.log("Added new shortcut");
+  } catch (error) {
+    console.error('Failed to write to JSON file:', error);
+    return null;
+  }
+})

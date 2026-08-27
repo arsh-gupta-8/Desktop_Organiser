@@ -1,4 +1,1 @@
-[
-  {"name": "YouTube", "domain": "https://youtube.com", "type": "website", "description": "Watch some videos here"},
-  {"name": "Google", "domain": "https://google.com", "type": "website", "description": "Search something"}
-]
+[{"name":"YouTube","domain":"https://youtube.com","description":"Watch some videos here","type":"website"},{"name":"Google","domain":"https://google.com","description":"Search something","type":"website"},{"name":"github","domain":"https://github.com","description":"to open github","type":"website"}]

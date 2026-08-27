@@ -142,6 +142,7 @@ main{
 .shortcut-display img{
   width: 5rem;
   height: auto;
+  border-radius: .5rem;
 }
 
 .shortcut-information{

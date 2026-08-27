@@ -68,3 +68,19 @@ const modalContent = document.querySelector('.modal');
 modalContent.addEventListener('click', function(event) {
   event.stopPropagation(); 
 });
+
+const newWebShortcutForm = document.getElementById('new-website-shortcut');
+newWebShortcutForm.addEventListener('submit', function(event) {
+  event.preventDefault();
+  const shortcutForm = new FormData(newWebShortcutForm);
+  
+  const shortcutInfo = {}
+
+  shortcutInfo["name"] = shortcutForm.get('name');
+  shortcutInfo["domain"] = shortcutForm.get('domain');
+  shortcutInfo["description"] = shortcutForm.get('description');
+  shortcutInfo["type"] = "website";
+
+  window.indexBridge.createShortcut(shortcutInfo);
+
+})
