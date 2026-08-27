@@ -59,3 +59,12 @@ async function loadShortcuts() {
 
 loadShortcuts().then(addOnClickFunction);
 
+const modal = document.querySelector('.modal-container');
+function toggleModal() {
+  modal.classList.toggle("hide");
+}
+
+const modalContent = document.querySelector('.modal');
+modalContent.addEventListener('click', function(event) {
+  event.stopPropagation(); 
+});

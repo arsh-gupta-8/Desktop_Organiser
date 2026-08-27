@@ -150,7 +150,7 @@ main{
 }
 
 .modal-container{
-  background-color: color-mix(in srgb, var(--base-colour) 40%, transparent);
+  background-color: color-mix(in srgb, var(--base-colour) 60%, transparent);
   position: fixed;
   top: 0;
   left: 0;
@@ -159,6 +159,10 @@ main{
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.modal-container.hide {
+  display: none;
 }
 
 .modal{
