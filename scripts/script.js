@@ -85,6 +85,21 @@ newWebShortcutForm.addEventListener('submit', function(event) {
 
 })
 
+const newAppShortcutForm = document.getElementById('new-app-shortcut');
+newAppShortcutForm.addEventListener('submit', function(event) {
+  event.preventDefault();
+  const shortcutForm = new FormData(newAppShortcutForm);
+
+  const shortcutInfo = {}
+
+  shortcutInfo["name"] = shortcutForm.get('name');
+  shortcutInfo["description"] = shortcutForm.get('description');
+  shortcutInfo["type"] = "app";
+
+  window.indexBridge.createAppShortcut(shortcutInfo);
+
+})
+
 const appModal = document.querySelector('.app-modal');
 const websiteModal = document.querySelector('.website-modal');
 const modalSwitch = document.getElementsByClassName('modal-switch');

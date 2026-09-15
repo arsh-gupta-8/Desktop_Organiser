@@ -1,5 +1,5 @@
 const path = require('path');
-const { app, BrowserWindow, shell, ipcMain } = require('electron')
+const { app, BrowserWindow, shell, ipcMain, dialog } = require('electron')
 const fs = require('fs/promises');
 
 const isDev = process.env.NODE_ENV !== 'production';
@@ -72,12 +72,8 @@ ipcMain.handle("createShortcut", async (event, shortcutInfo) => {
   }
 })
 
-ipcMain.handle("createAppShortcut", async (event, shortcutInfo) => {
-
-  const filePath = path.join(__dirname, 'shortcuts.json');
-  const data = await fs.readFile(filePath, 'utf-8');
-  
-  const path = await dialog.showOpenDialog({
+async function getPath() {
+  const pathResult = await dialog.showOpenDialog({
     title: "Select an application",
     properties: ['openFile'],
     filters: [
@@ -85,11 +81,25 @@ ipcMain.handle("createAppShortcut", async (event, shortcutInfo) => {
     ]
   });
 
-  if (!path.canceled && path.filePaths.length > 0) {
+  return pathResult;
+};
+
+ipcMain.handle("createAppShortcut", async (event, shortcutInfo) => {
+
+  const filePath = path.join(__dirname, 'shortcuts.json');
+  const data = await fs.readFile(filePath, 'utf-8');
+  
+  const shortcutPath = await getPath();
+
+  console.log(shortcutPath);
+
+  if (!shortcutPath.canceled && shortcutPath.filePaths.length > 0) {
     shortcutsList = JSON.parse(data);
-    shortcutInfo.path = path.filePaths[0];
+    shortcutInfo.path = shortcutPath.filePaths[0];
     shortcutsList.push(shortcutInfo);
     updatedList = JSON.stringify(shortcutsList);
+    await fs.writeFile(filePath, updatedList, 'utf-8');
+    console.log("Added new shortcut");
   }
 
   return null;

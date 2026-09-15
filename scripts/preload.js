@@ -12,6 +12,10 @@ let indexBridge = {
   createShortcut: async (shortcutInfo) => {
     await ipcRenderer.invoke("createShortcut", shortcutInfo)
   },
+
+  createAppShortcut: async (shortcutInfo) => {
+    await ipcRenderer.invoke("createAppShortcut", shortcutInfo)
+  },
 }
 
 contextBridge.exposeInMainWorld("indexBridge", indexBridge)
