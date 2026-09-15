@@ -84,3 +84,17 @@ newWebShortcutForm.addEventListener('submit', function(event) {
   window.indexBridge.createShortcut(shortcutInfo);
 
 })
+
+const appModal = document.querySelector('.app-modal');
+const websiteModal = document.querySelector('.website-modal');
+const modalSwitch = document.getElementsByClassName('modal-switch');
+
+Array.from(modalSwitch).forEach(function(button) {
+  button.addEventListener('click', function(event) {
+    appModal.classList.toggle('hide');
+    websiteModal.classList.toggle('hide');
+  });
+});
+
+websiteModal.classList.remove('hide');
+appModal.classList.add('hide');

@@ -52,10 +52,16 @@
   </main>
   <div class="modal-container hide" onclick="toggleModal()">
     <div class="modal">
-      <div class="website-modal hide">
+      
+      <div class="website-modal modal-interior">
         <div class="modal-header">
           <h2>New Web Shortcut</h2>
         </div>
+        <button class="modal-switch">
+          <p>App</p>
+          <p> | </p>
+          <p>Website</p>
+        </button>
         <div class="modal-content">
           <form id="new-website-shortcut">
             <div class="input-container">
@@ -76,10 +82,15 @@
           </form>
         </div>
       </div>
-      <div class="app-modal hide">
+      <div class="app-modal modal-interior hide">
         <div class="modal-header">
           <h2>New App Shortcut</h2>
         </div>
+        <button class="modal-switch">
+          <p>App</p>
+          <p> | </p>
+          <p>Website</p>
+        </button>
         <div class="modal-content">
           <form id="new-app-shortcut">
             <div class="input-container">

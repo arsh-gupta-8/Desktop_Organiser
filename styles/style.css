@@ -163,18 +163,23 @@ main{
 }
 
 .hide {
-  display: none;
+  display: none !important;
 }
 
 .modal{
-  background-color: var(--base-colour);
   padding: 1.5rem;
+  display: flex;
+  border: 5px solid var(--line-colour);
+  border-radius: 1rem;
+  background-color: var(--base-colour);
+}
+
+.modal-interior{
+  
   width: 20rem;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  border: 5px solid var(--line-colour);
-  border-radius: 1rem;
 }
 
 .modal-content form{
