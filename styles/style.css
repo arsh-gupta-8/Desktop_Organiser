@@ -228,3 +228,17 @@ main{
 .submit-container :hover{
   background-color: var(--hover-colour);
 }
+
+.modal-switch{
+  display: flex;
+  justify-content: space-evenly;
+  font-size: 1rem;
+  background-color: var(--background-colour);
+  border: none;
+  color: white;
+}
+
+.modal-option-selected{
+  color: var(--accent-colour);
+  font-weight: 600;
+}
