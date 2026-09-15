@@ -162,7 +162,7 @@ main{
   align-items: center;
 }
 
-.modal-container.hide {
+.hide {
   display: none;
 }
 

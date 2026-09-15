@@ -71,3 +71,26 @@ ipcMain.handle("createShortcut", async (event, shortcutInfo) => {
     return null;
   }
 })
+
+ipcMain.handle("createAppShortcut", async (event, shortcutInfo) => {
+
+  const filePath = path.join(__dirname, 'shortcuts.json');
+  const data = await fs.readFile(filePath, 'utf-8');
+  
+  const path = await dialog.showOpenDialog({
+    title: "Select an application",
+    properties: ['openFile'],
+    filters: [
+      { name: 'Applications', extensions: ['exe', 'app', 'bat', 'sh', 'lnk'] }
+    ]
+  });
+
+  if (!path.canceled && path.filePaths.length > 0) {
+    shortcutsList = JSON.parse(data);
+    shortcutInfo.path = path.filePaths[0];
+    shortcutsList.push(shortcutInfo);
+    updatedList = JSON.stringify(shortcutsList);
+  }
+
+  return null;
+})
