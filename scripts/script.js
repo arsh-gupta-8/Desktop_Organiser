@@ -13,16 +13,20 @@ function addOnClickFunction() {
 
   appCards.forEach(card => {
     card.addEventListener('click', function() {
-      const targetUrl = this.id; 
-      
-      if (targetUrl !== "AddShortcut"){
-        window.indexBridge.openWebsite(targetUrl);
+      const targetDestination = this.id;
+      const classes = this.classList;
+
+      if (targetDestination !== "AddShortcut"){
+        if (classes.contains('this-is-an-app')) { 
+          window.indexBridge.openApp(targetDestination);
+        } else {
+          window.indexBridge.openWebsite(targetDestination);
+        }
       }
 
     });
   });
 }
-
 
 async function loadShortcuts() {
   
@@ -36,17 +40,34 @@ async function loadShortcuts() {
       const shortcutCard = document.createElement('div');
 
       shortcutCard.className = 'container shortcut';
-      shortcutCard.id = shortcut.domain;
+      
 
-      shortcutCard.innerHTML = `
-        <div class="shortcut-display">
-          <img src="https://www.google.com/s2/favicons?domain=${shortcut.domain}&sz=128" alt="${shortcut.name}">
-          <h3>${shortcut.name}</h3>
-        </div>
-        <div class="shortcut-information">
-          <p>${shortcut.description}</p>
-        </div>
-      `;
+      let addID = null;
+      if (shortcut.type === "app") {
+        shortcutCard.id = shortcut.path;
+        shortcutCard.className = shortcutCard.className + " this-is-an-app";
+        shortcutCard.innerHTML = `
+          <div class="shortcut-display">
+            <img src="https://www.google.com/s2/favicons?domain=${shortcut.domain}&sz=128" alt="${shortcut.name}">
+            <h3>${shortcut.name}</h3>
+          </div>
+          <div class="shortcut-information">
+            <p>${shortcut.description}</p>
+          </div>
+        `;
+      } else {
+        shortcutCard.id = shortcut.domain;
+        shortcutCard.innerHTML = `
+          <div class="shortcut-display">
+            <img src="https://www.google.com/s2/favicons?domain=${shortcut.domain}&sz=128" alt="${shortcut.name}">
+            <h3>${shortcut.name}</h3>
+          </div>
+          <div class="shortcut-information">
+            <p>${shortcut.description}</p>
+          </div>
+        `;
+      }
+      
 
       main.insertBefore(shortcutCard, addShortcut);
 

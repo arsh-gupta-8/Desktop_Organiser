@@ -5,6 +5,10 @@ let indexBridge = {
     await ipcRenderer.invoke("openWebsite", targetUrl)
   },
 
+  openApp: async (targetPath) => {
+    await ipcRenderer.invoke("openApp", targetPath)
+  },
+
   getShortcuts: async () => {
     return await ipcRenderer.invoke('getShortcuts')
   },

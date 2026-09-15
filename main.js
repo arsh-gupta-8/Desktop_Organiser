@@ -44,6 +44,11 @@ ipcMain.handle("openWebsite", (event, targetUrl) => {
   shell.openExternal(targetUrl);
 })
 
+ipcMain.handle("openApp", (event, targetPath) => {
+  console.log("Opening app.. ", targetPath)
+  shell.openPath(targetPath);
+})
+
 ipcMain.handle('getShortcuts', async () => {
   try {
     const filePath = path.join(__dirname, 'shortcuts.json');
