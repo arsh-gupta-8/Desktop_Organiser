@@ -48,7 +48,7 @@ async function loadShortcuts() {
         shortcutCard.className = shortcutCard.className + " this-is-an-app";
         shortcutCard.innerHTML = `
           <div class="shortcut-display">
-            <img src="https://www.google.com/s2/favicons?domain=${shortcut.domain}&sz=128" alt="${shortcut.name}">
+          <img src="${shortcut.icon}" alt="${shortcut.name}">
             <h3>${shortcut.name}</h3>
           </div>
           <div class="shortcut-information">

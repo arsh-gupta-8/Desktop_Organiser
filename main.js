@@ -65,9 +65,9 @@ ipcMain.handle("createShortcut", async (event, shortcutInfo) => {
     const filePath = path.join(__dirname, 'shortcuts.json');
     const data = await fs.readFile(filePath, 'utf-8');
     
-    shortcutsList = JSON.parse(data);
+    let shortcutsList = JSON.parse(data);
     shortcutsList.push(shortcutInfo);
-    updatedList = JSON.stringify(shortcutsList);
+    let updatedList = JSON.stringify(shortcutsList);
     
     await fs.writeFile(filePath, updatedList, 'utf-8');
     console.log("Added new shortcut");
@@ -90,22 +90,25 @@ async function getPath() {
 };
 
 ipcMain.handle("createAppShortcut", async (event, shortcutInfo) => {
-
-  const filePath = path.join(__dirname, 'shortcuts.json');
-  const data = await fs.readFile(filePath, 'utf-8');
   
   const shortcutPath = await getPath();
 
-  console.log(shortcutPath);
-
   if (!shortcutPath.canceled && shortcutPath.filePaths.length > 0) {
-    shortcutsList = JSON.parse(data);
+
+    const filePath = path.join(__dirname, 'shortcuts.json');
+    const data = await fs.readFile(filePath, 'utf-8');
+    const iconImage = await app.getFileIcon(shortcutPath.filePaths[0], { size: isMac ? 'normal' : 'large' });
+    
+    let shortcutsList = JSON.parse(data);
     shortcutInfo.path = shortcutPath.filePaths[0];
+    shortcutInfo.icon = iconImage.toDataURL();
     shortcutsList.push(shortcutInfo);
-    updatedList = JSON.stringify(shortcutsList);
+     
+    let updatedList = JSON.stringify(shortcutsList);
+    
     await fs.writeFile(filePath, updatedList, 'utf-8');
     console.log("Added new shortcut");
+  } else {
+    console.log("No application selected.");
   }
-
-  return null;
 })
