@@ -103,6 +103,7 @@ body{
 
 main{
   display: flex;
+  flex-wrap: wrap;
 }
 
 .container{
