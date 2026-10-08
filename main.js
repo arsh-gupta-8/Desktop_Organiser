@@ -100,16 +100,27 @@ async function getMacAppIconBase64(appPath) {
   import Cocoa
   let path = \\"${escapedPath}\\"
   let icon = NSWorkspace.shared.icon(forFile: path)
-  if icon.size.width > 0,
-     let tiff = icon.tiffRepresentation, 
-     let bitmap = NSBitmapImageRep(data: tiff), 
-     let png = bitmap.representation(using: .png, properties: [:]) {
+  if icon.size.width > 0 {
+    let targetSize = NSSize(width: 64, height: 64)
+    let targetImage = NSImage(size: targetSize)
+    
+    targetImage.lockFocus()
+    icon.draw(in: NSRect(origin: .zero, size: targetSize), 
+        from: NSRect(origin: .zero, size: icon.size), 
+        operation: .copy, 
+        fraction: 0.9)
+    targetImage.unlockFocus()
+
+    if let tiff = targetImage.tiffRepresentation, 
+      let bitmap = NSBitmapImageRep(data: tiff), 
+      let png = bitmap.representation(using: .png, properties: [:]) {
       print(png.base64EncodedString(options: []))
+    }
   }
   "`;
 
   try {
-    const { stdout } = await execPromise(swiftCommand, {maxBuffer: 1024 * 1024 * 5});
+    const { stdout } = await execPromise(swiftCommand, {maxBuffer: 1024 * 1024 * 1});
     const base64Data = stdout.trim();
     if (base64Data) {
       return `data:image/png;base64,${base64Data}`;
