@@ -2,6 +2,10 @@ const path = require('path');
 const { app, BrowserWindow, shell, ipcMain, dialog } = require('electron')
 const fs = require('fs/promises');
 
+const { exec } = require('child_process');
+const util = require('util');
+const execPromise = util.promisify(exec);
+
 const isDev = process.env.NODE_ENV !== 'production';
 const isMac = process.platform === 'darwin';
 
@@ -89,26 +93,60 @@ async function getPath() {
   return pathResult;
 };
 
+async function getMacAppIconBase64(appPath) {
+  const escapedPath = appPath.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
+
+  const swiftCommand = `swift -e "
+  import Cocoa
+  let path = \\"${escapedPath}\\"
+  let icon = NSWorkspace.shared.icon(forFile: path)
+  if icon.size.width > 0,
+     let tiff = icon.tiffRepresentation, 
+     let bitmap = NSBitmapImageRep(data: tiff), 
+     let png = bitmap.representation(using: .png, properties: [:]) {
+      print(png.base64EncodedString(options: []))
+  }
+  "`;
+
+  try {
+    const { stdout } = await execPromise(swiftCommand, {maxBuffer: 1024 * 1024 * 5});
+    const base64Data = stdout.trim();
+    if (base64Data) {
+      return `data:image/png;base64,${base64Data}`;
+    }
+  } catch (err) {
+    console.error("Swift extraction failed, falling back to Electron API", err);
+  }
+  return null;
+}
+
+// Your Handler
 ipcMain.handle("createAppShortcut", async (event, shortcutInfo) => {
-  
   const shortcutPath = await getPath();
 
   if (!shortcutPath.canceled && shortcutPath.filePaths.length > 0) {
-
     const filePath = path.join(__dirname, 'shortcuts.json');
     const data = await fs.readFile(filePath, 'utf-8');
-    const iconImage = await app.getFileIcon(shortcutPath.filePaths[0], { size: isMac ? 'normal' : 'large' });
+    const selectedAppPath = shortcutPath.filePaths[0];
+
+    let iconDataUrl = "";
+
+    if (isMac && selectedAppPath.endsWith('.app')) {
+      iconDataUrl = await getMacAppIconBase64(selectedAppPath);
+    } else {
+      const iconImage = await app.getFileIcon(selectedAppPath, { size: 'large' });
+      iconDataUrl = iconImage.toDataURL();
+    }
     
     let shortcutsList = JSON.parse(data);
-    shortcutInfo.path = shortcutPath.filePaths[0];
-    shortcutInfo.icon = iconImage.toDataURL();
+    shortcutInfo.path = selectedAppPath;
+    shortcutInfo.icon = iconDataUrl;
     shortcutsList.push(shortcutInfo);
      
     let updatedList = JSON.stringify(shortcutsList);
-    
     await fs.writeFile(filePath, updatedList, 'utf-8');
-    console.log("Added new shortcut");
+    console.log("Added new shortcut with crisp app icon!");
   } else {
     console.log("No application selected.");
   }
-})
+});
