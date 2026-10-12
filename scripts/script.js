@@ -91,7 +91,7 @@ modalContent.addEventListener('click', function(event) {
 });
 
 const newWebShortcutForm = document.getElementById('new-website-shortcut');
-newWebShortcutForm.addEventListener('submit', function(event) {
+newWebShortcutForm.addEventListener('submit', async function(event) {
   event.preventDefault();
   const shortcutForm = new FormData(newWebShortcutForm);
   
@@ -106,6 +106,7 @@ newWebShortcutForm.addEventListener('submit', function(event) {
 
   toggleModal();
   newWebShortcutForm.reset();
+  location.reload();
 
 })
 
@@ -124,6 +125,7 @@ newAppShortcutForm.addEventListener('submit', async function(event) {
   if (newShortcut){
     toggleModal();
     newAppShortcutForm.reset();
+    location.reload();
   }
 })
 
