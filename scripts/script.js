@@ -2,6 +2,13 @@ const toggleButton = document.getElementById('toggle-button')
 const sidebar = document.getElementById('sidebar')
 
 
+document.addEventListener('click', function() {
+  document.querySelectorAll('.dropdown-menu').forEach(menu => {
+    menu.classList.add('hide');
+  });
+});
+
+
 function toggleSidebar(){
   sidebar.classList.toggle('close')
   toggleButton.classList.toggle('rotate')
@@ -33,7 +40,21 @@ function addOnClickFunction() {
     option.addEventListener('click', function(event) {
       event.stopPropagation();
       const dropdownMenu = this.nextElementSibling;
-      dropdownMenu.classList.toggle('hide');
+      const isCurrentlyHidden = dropdownMenu.classList.contains('hide');
+
+      document.querySelectorAll('.dropdown-menu').forEach(menu => {
+        menu.classList.add('hide');
+      });
+
+      if (isCurrentlyHidden) {
+        dropdownMenu.classList.remove('hide');
+      }
+    });
+  });
+
+  dropdownMenu.forEach(menu => {
+    menu.addEventListener('click', function(event) {
+      event.stopPropagation();
     });
   });
 }
