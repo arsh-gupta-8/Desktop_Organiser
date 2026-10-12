@@ -131,9 +131,9 @@ main{
   outline-color: var(--accent-colour);
 }
 
-.shortcut:hover{
+/* .shortcut:hover{
   width: 16rem;
-}
+} */
 
 .shortcut-display{
   width: 8rem;
@@ -150,10 +150,10 @@ main{
   border-radius: .5rem;
 }
 
-.shortcut-information{
+/* .shortcut-information{
   width: 8rem;
   flex-shrink: 0;
-}
+} */
 
 .options-btn {
   position: absolute;

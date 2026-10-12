@@ -61,7 +61,7 @@ async function loadShortcuts() {
             <h3>${shortcut.name}</h3>
           </div>
           <div class="shortcut-information">
-            <p>${shortcut.description}</p>
+            // <p>${shortcut.description}</p>
           </div>
         `;
       } else {
@@ -73,7 +73,7 @@ async function loadShortcuts() {
             <h3>${shortcut.name}</h3>
           </div>
           <div class="shortcut-information">
-            <p>${shortcut.description}</p>
+            // <p>${shortcut.description}</p>
           </div>
         `;
       }
